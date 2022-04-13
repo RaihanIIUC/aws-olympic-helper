@@ -315,7 +315,7 @@ class BdappsController extends Controller
         // $address = $receiver->getAddress(); // Get the phone no from which the message was sent
         // $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
 
-        \info($sender);
+        return response()->json([$sender]);
         //	Send a SMS to a particular user
         // $response = $sender->sms('Thanks for your response', $address);
         // response_log::create(['timeStamp' => $response->timeStamp, 'address' => $response->address, 'messageId' => $response->messageId, 'statusDetail' => $response->statusDetail, 'statusCode' => $response->statusCode]);
