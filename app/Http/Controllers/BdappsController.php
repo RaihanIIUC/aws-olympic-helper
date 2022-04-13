@@ -306,137 +306,22 @@ class BdappsController extends Controller
         $apppassword = "00febb6e06c0c8a30c268f18d69de401";
         $logger = new Logger();
 
-        try {
+        $receiver = new SMSReceiver(file_get_contents('php://input'));
 
-            //$myfile = fopen("report.txt", "a+") or die("Unable to open file!");
-            //$unregFile = fopen("unreg.txt", "a+") or die("Unable to open file!");
-            // Creating a receiver and intialze it with the incomming data
-            $receiver = new SMSReceiver(file_get_contents('php://input'));
+        //Creating a sender
+        $sender = new SMSSender($server, $appid, $apppassword);
 
-            //Creating a sender
-            $sender = new SMSSender($server, $appid, $apppassword);
+        $message = $receiver->getMessage(); // Get the message sent to the app
+        $address = $receiver->getAddress(); // Get the phone no from which the message was sent
+        $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
 
-            $message = $receiver->getMessage(); // Get the message sent to the app
-            $address = $receiver->getAddress(); // Get the phone no from which the message was sent
-            $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
-            $error_msg = "";
-
-            $a = explode(" ", $message);
-            $b = " ";
-            for ($i = 1; $i < sizeof($a); $i++) {
-                $b = $b . ' ' . $a[$i];
-            }
-            $message = $b;
-            $message = trim($message);
-
-            try {
-                date_default_timezone_set("Asia/Dhaka");
-                $current_date = date('Y-m-d H:i:s');
-                $text = $this->split_msg($message);
-
-                $final_address = trim($address, "tel:");
-
-                if ($text == "error") {
-                    $error_msg .= 'Message text not correectly formatted';
-                    // file_put_contents('address.txt',$final_address." ".$text);
-                } else {
-                    $arr = $text[0];
-                    $string = $text[1];
-
-                    $type = $string[0];
-                    $date2 = $string[1];
-                    $route = $string[2];
-                    $sql = route::where('route', 'LIKE', $route . '%')->first();
-                    if (!$sql) {
-                        $error_msg .= $route . " Not found" . ',';
-                    }
-
-                    $second_last_index = sizeof($arr) - 2;
-
-                    $last_index = sizeof($arr) - 1;
-                    $total_value_text = $arr[$second_last_index];
-                    // file_put_contents('test.txt',$second_last_index.' '. $total_value_text);
-                    if ($total_value_text != 'TV') {
-                        $error_msg .= 'TV not found' . ',';
-                    }
-
-                    $items = array();
-                    for ($i = 0; $i < (sizeof($arr) / 2) - 1; $i++) {
-                        $item = $arr[2 * $i];
-                        array_push($items, trim($item));
-                        $qty = $arr[2 * $i + 1];
-                        $sql = item::where('item_id', $item)->first();
-                        if (!$sql) {
-                            $error_msg .= $item . " Not found" . ',';
-                        }
-                    }
-                    $item_count = array_count_values($items);
-                    foreach ($item_count as $key => $value) {
-                        if ($value > 1) {
-                            $error_msg .= $key . " contains " . $value . ' times ,';
-                        }
-                    }
-                    //file_put_contents('test5.txt',json_encode($item_count));
-                    /*
-					for($j=0;$j<sizeof($items);$j++)
-					{
-						$count = $item_count[$items[$j]];
-						if($count>1)
-						{
-							$error_msg .= $items[$j] . "contains" .$count. 'times ,';
-						}
-						
-					}
-					*/
-                    if (strlen($date2) != 4) {
-                        $error_msg .= $date2 . " Date format should be 4 digit" . ',';
-                    } else {
-
-                        $order = $date2;
-                        $order_date = $order[0] . $order[1];
-                        $order_month = $order[2] . $order[3];
-                        $order_year = '2021';
-                        $date = $order_year . "/" . $order_month . "/" . $order_date;
-                        $date = strtotime($date);
-                        $date = date('Y-m-d', $date);
-                    }
-                    $route_with_number = route_with_number::where('mobile_number', $final_address)->where('short_name', 'LIKE', $route . '%')->first();
-                    if (!$route_with_number) {
-                        $error_msg .= $final_address . " is not associated with " . $route . ',';
-                    }
-                }
-                if ($error_msg) {
-
-                    // file_put_contents('test2.txt',$error_msg);
-                    $error = error_message::create(['msg_date' => $current_date, 'mobile_number' => $final_address, 'sms_text' => $message, 'error_report' => $error_msg, 'status' => 0]);
-
-                    error_message::where('id', $error->id)
-                        ->update(['sl' => $error->id]);
-                } else {
-
-                    $download_msg = download_message::create(['mobile_number' => $final_address, 'message_text' => $message, 'msg_date' => $current_date]);
-
-                    $last_id = $download_msg->id;
-                    download_message::where('id', $last_id)->update(['sl' => $last_id]);
-                    for ($i = 0; $i < (sizeof($arr) / 2) - 1; $i++) {
-                        $item = $arr[2 * $i];
-                        $qty = $arr[2 * $i + 1];
-                        voucher_details::create(['sl' => $last_id, 'type' => $type, 'item' => $item, 'qty' => $qty]);
-                    }
-
-                    voucher_head::create(['sl' => $last_id, 'type' => $type, 'msg_date' => $current_date, 'od_date' => $date, 'mobile_number' => $final_address, 'route' => $string[2], 'amount' => $arr[$last_index]]);
-                }
-            } catch (\Exception $e) {
-            }
-
-            //	Send a SMS to a particular user
-            $response = $sender->sms('Thanks for your response', $address);
-            response_log::create(['timeStamp' => $response->timeStamp, 'address' => $response->address, 'messageId' => $response->messageId, 'statusDetail' => $response->statusDetail, 'statusCode' => $response->statusCode]);
-            //file_put_contents('test.txt',$response[0]->statusCode);
+        \info($receiver, $appid);
+        //	Send a SMS to a particular user
+        // $response = $sender->sms('Thanks for your response', $address);
+        // response_log::create(['timeStamp' => $response->timeStamp, 'address' => $response->address, 'messageId' => $response->messageId, 'statusDetail' => $response->statusDetail, 'statusCode' => $response->statusCode]);
+        //file_put_contents('test.txt',$response[0]->statusCode);
 
 
-        } catch (SMSServiceException $e) {
-            $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
-        }
+
     }
 }
