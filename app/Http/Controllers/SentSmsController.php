@@ -23,7 +23,7 @@ class SentSmsController extends Controller
     public function sms(Request $request)
     {
 
-        file_put_contents('test.txt', 'hello');
+        // file_put_contents('test.txt', 'hello');
         $server = 'https://developer.bdapps.com/sms/send';
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
