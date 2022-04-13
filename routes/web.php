@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/hello', [SentSmsController::class, 'hello']);
+Route::get('/', [SentSmsController::class, 'hello']);
+
+// Route::get('/hello', [SentSmsController::class, 'hello']);
