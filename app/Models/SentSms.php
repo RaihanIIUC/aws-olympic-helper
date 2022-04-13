@@ -10,6 +10,6 @@ class SentSms extends Model
     use HasFactory;
 
     protected $fillable = [
-        'timeStamp', 'address', 'message', 'messageId', 'statusDetail', 'statusCode'
+        'applicationId', 'message', 'sourceAddress', 'requestId'
     ];
 }
