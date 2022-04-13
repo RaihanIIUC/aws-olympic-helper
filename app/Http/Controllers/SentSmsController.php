@@ -5,25 +5,78 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SmsStoreRequest;
 use App\Models\SentSms;
 use Illuminate\Http\Request;
+use App\Classes\UssdReceiver;
+use App\Classes\UssdSender;
+use App\Classes\UssdException;
+use App\Classes\Logger;
+use App\Classes\Subscription;
+use App\Classes\SubscriptionException;
+
+use App\Classes\SMSSender;
+use App\Classes\SMSReceiver;
+use App\Classes\SMSServiceException;
 
 class SentSmsController extends Controller
 {
 
 
-    public function SmsStore(SmsStoreRequest $request)
+    public function sms(SmsStoreRequest $request)
     {
 
-        SentSms::create([
-            'applicationId' => $request->applicationId,
-            'sourceAddress' => $request->sourceAddress,
-            'message' => $request->message,
-            'requestId' => $request->requestId
-        ]);
+        file_put_contents('test.txt', 'hello');
+        $server = 'https://developer.bdapps.com/sms/send';
+        $appid = "APP_036385";
+        $apppassword = "00febb6e06c0c8a30c268f18d69de401";
+        $logger = new Logger();
+        try {
 
-        return response()->json([
-            'status' => 'success'
-        ]);
+
+            $receiver = new SMSReceiver(file_get_contents('php://input'));
+
+            //Creating a sender
+            $sender = new SMSSender($server, $appid, $apppassword);
+
+            $message = $receiver->getMessage(); // Get the message sent to the app
+            $address = $receiver->getAddress(); // Get the phone no from which the message was sent
+            $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
+
+
+            // storing the data in database 
+            SentSms::create([
+                'applicationId' => $appid,
+                'sourceAddress' => $address,
+                'message' => $message,
+            ]);
+
+            //	Send a SMS to a particular user
+            $response = $sender->sms('Thanks for your response', $address);
+            return response()->json([
+                'status' => $response
+            ]);
+        } catch (SMSServiceException $e) {
+            $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
+            return response()->json([
+                'status' => $e->getErrorCode() . " " . $e->getErrorMessage() . "\n"
+            ]);
+        }
     }
+
+
+
+    // public function SmsStore(SmsStoreRequest $request)
+    // {
+
+    //     SentSms::create([
+    //         'applicationId' => $request->applicationId,
+    //         'sourceAddress' => $request->sourceAddress,
+    //         'message' => $request->message,
+    //         'requestId' => $request->requestId
+    //     ]);
+
+    //     return response()->json([
+    //         'status' => 'success'
+    //     ]);
+    // }
 
 
     public function SearchByDate(Request $request)

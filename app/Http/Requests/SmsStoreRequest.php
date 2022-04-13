@@ -26,8 +26,7 @@ class SmsStoreRequest extends FormRequest
         return [
             'applicationId' => 'required',
             'sourceAddress' => 'required',
-            'message' => 'required',
-            'requestId' => 'required',
+            'message' => 'required'
         ];
     }
 }
