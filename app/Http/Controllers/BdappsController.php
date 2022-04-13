@@ -300,7 +300,7 @@ class BdappsController extends Controller
     public function sms(Request $request)
     {
 
-        file_put_contents('test.txt', 'hello');
+        // file_put_contents('test.txt', 'hello');
         $server = 'https://developer.bdapps.com/sms/send';
         $appid = "APP_036385";
         $apppassword = "00febb6e06c0c8a30c268f18d69de401";
