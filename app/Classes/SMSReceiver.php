@@ -6,7 +6,7 @@ use Exception;
 
 class SMSReceiver
 {
-	private $version = '1.0';
+	private $version;
 	private	$applicationId;
 	private	$sourceAddress;
 	private $message;
@@ -32,7 +32,7 @@ class SMSReceiver
 				$response = array('statusCode' => 'E1312', 'statusDetail' => 'Request is Invalid.');
 			else {
 				$this->thejson = $jsonRequest;
-				$this->version = $jsonRequest->version;
+				$this->version = "1.0";
 				$this->applicationId = $jsonRequest->applicationId;
 				$this->sourceAddress = $jsonRequest->sourceAddress;
 				$this->message = $jsonRequest->message;
