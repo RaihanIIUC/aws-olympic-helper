@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\BdappsController;
-use App\Http\Controllers\SentSmsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::post('/sms', [SentSmsController::class, 'sms'])->name('sms');
-// Route::post('/query', [SentSmsController::class, 'SearchByDate'])->name('query');
-Route::get('/hello', [SentSmsController::class, 'hello']);
-Route::post('/sms', [BdappsController::class, 'sms']);
+
+Route::post('sms','BdappsController@sms');
