@@ -32,7 +32,7 @@ class SMSReceiver
 				$response = array('statusCode' => 'E1312', 'statusDetail' => 'Request is Invalid.');
 			else {
 				$this->thejson = $jsonRequest;
-				$this->version = "1.0";
+				$this->version = $jsonRequest->version;
 				$this->applicationId = $jsonRequest->applicationId;
 				$this->sourceAddress = $jsonRequest->sourceAddress;
 				$this->message = $jsonRequest->message;

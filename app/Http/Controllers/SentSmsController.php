@@ -32,7 +32,7 @@ class SentSmsController extends Controller
 
         try {
 
-            \info(file_get_contents('php://input'));
+            info(file_get_contents('php://input'));
             $receiver = new SMSReceiver(file_get_contents('php://input'));
             dd($receiver);
             //Creating a sender
