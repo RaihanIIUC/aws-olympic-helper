@@ -95,4 +95,9 @@ class SentSmsController extends Controller
 
         return response()->json([$queryByDate], 200);
     }
+
+    public function hello()
+    {
+        return response()->json('hellos', 200);
+    }
 }

@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/sms', [SentSmsController::class, 'sms'])->name('sms');
 Route::post('/query', [SentSmsController::class, 'SearchByDate'])->name('query');
+Route::get('/hello', [SentSmsController::class, 'hello']);
