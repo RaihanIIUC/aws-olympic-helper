@@ -16,10 +16,12 @@ return new class extends Migration
     {
         Schema::create('sent_sms', function (Blueprint $table) {
             $table->id();
-            $table->string('applicationId');
-            $table->string('sourceAddress')->nullable();
-            $table->string('message')->nullable();
-            $table->string('requestId')->nullable();
+            $table->string('timeStamp');
+            $table->string('address');
+            $table->text('message');
+            $table->string('messageId');
+            $table->string('statusDetail');
+            $table->text('statusCode');
             $table->timestamps();
         });
     }

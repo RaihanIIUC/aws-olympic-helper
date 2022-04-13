@@ -20,7 +20,7 @@ class SentSmsController extends Controller
 {
 
 
-    public function sms(SmsStoreRequest $request)
+    public function sms(Request $request)
     {
 
         file_put_contents('test.txt', 'hello');
@@ -41,22 +41,28 @@ class SentSmsController extends Controller
             $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
 
 
-            // storing the data in database 
-            SentSms::create([
-                'applicationId' => $appid,
-                'sourceAddress' => $address,
-                'message' => $message,
-            ]);
 
             //	Send a SMS to a particular user
             $response = $sender->sms('Thanks for your response', $address);
+
+            // storing the data in database 
+            SentSms::create([
+                'timeStamp' => $response->timeStamp,
+                'address' => $response->address,
+                'message' => $message,
+                'messageId' => $response->messageId,
+                'statusDetail' => $response->statusDetail,
+                'statusCode' => $response->statusCode
+            ]);
+
             return response()->json([
-                'status' => $response
+                'status' => 'win',
+                'response_log' => $response
             ]);
         } catch (SMSServiceException $e) {
             $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
             return response()->json([
-                'status' => $e->getErrorCode() . " " . $e->getErrorMessage() . "\n"
+                'status' => 'failed', 'response_log' => $e->getErrorCode() . " " . $e->getErrorMessage() . "\n"
             ]);
         }
     }
