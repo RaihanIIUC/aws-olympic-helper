@@ -70,20 +70,20 @@ class SentSmsController extends Controller
 
 
 
-    // public function SmsStore(SmsStoreRequest $request)
-    // {
+    public function SmsStore(SmsStoreRequest $request)
+    {
 
-    //     SentSms::create([
-    //         'applicationId' => $request->applicationId,
-    //         'sourceAddress' => $request->sourceAddress,
-    //         'message' => $request->message,
-    //         'requestId' => $request->requestId
-    //     ]);
+        SentSms::create([
+            'applicationId' => $request->applicationId,
+            'sourceAddress' => $request->sourceAddress,
+            'message' => $request->message,
+            'requestId' => $request->requestId
+        ]);
 
-    //     return response()->json([
-    //         'status' => 'success'
-    //     ]);
-    // }
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
 
 
     public function SearchByDate(Request $request)

@@ -20,6 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 // Route::post('/sms', [SentSmsController::class, 'sms'])->name('sms');
-// Route::post('/query', [SentSmsController::class, 'SearchByDate'])->name('query');
+Route::post('/query', [SentSmsController::class, 'SearchByDate'])->name('query');
+Route::post('/sendsms', [SentSmsController::class, 'SmsStore']);
+
 Route::get('/hello', [SentSmsController::class, 'hello']);
 Route::post('/sms', [BdappsController::class, 'sms']);
