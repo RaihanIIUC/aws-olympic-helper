@@ -23,16 +23,18 @@ class SentSmsController extends Controller
     public function sms(Request $request)
     {
 
+
         // file_put_contents('test.txt', 'hello');
         $server = 'https://developer.bdapps.com/sms/send';
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
-        $logger = new Logger();
+        // dd($server, $appid, $apppassword);
+
         try {
 
-
+            \info(file_get_contents('php://input'));
             $receiver = new SMSReceiver(file_get_contents('php://input'));
-
+            dd($receiver);
             //Creating a sender
             $sender = new SMSSender($server, $appid, $apppassword);
 
@@ -57,10 +59,9 @@ class SentSmsController extends Controller
 
             return response()->json([
                 'status' => 'win',
-                'response_log' => $response
+                'response_log'
             ]);
         } catch (SMSServiceException $e) {
-            $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
             return response()->json([
                 'status' => 'failed', 'response_log' => $e->getErrorCode() . " " . $e->getErrorMessage() . "\n"
             ]);
