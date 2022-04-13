@@ -25,8 +25,8 @@ class SentSmsController extends Controller
 
         file_put_contents('test.txt', 'hello');
         $server = 'https://developer.bdapps.com/sms/send';
-        $appid = "APP_036385";
-        $apppassword = "00febb6e06c0c8a30c268f18d69de401";
+        $appid = "APP_060322";
+        $apppassword = "edf54eb9915fb5064caea8778368dd9c";
         $logger = new Logger();
         try {
 
