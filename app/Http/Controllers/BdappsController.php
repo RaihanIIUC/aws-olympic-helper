@@ -26,6 +26,7 @@ use App\Models\route_with_number;
 use App\Models\response_log;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
+TypeError: log(): Argument #1 ($num) must be of type float, string given in file E:\Olympic\aws-olympic-helper\app\Http\Controllers\BdappsController.php on line 73
 
 class BdappsController extends Controller
 {
@@ -70,28 +71,27 @@ class BdappsController extends Controller
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
 
-        \log('hello');
-
-        // try {
+        try {
 
 
-        //     // Creating a receiver and intialze it with the incomming data
-        //     $receiver = new SMSReceiver($request->all());
+            // Creating a receiver and intialze it with the incomming data
+            $receiver = new SMSReceiver($request->all());
 
 
-        //     $sender = new SmsSender("https://developer.bdapps.com/sms/send", $appid, $apppassword);
+            $sender = new SmsSender("https://developer.bdapps.com/sms/send", $appid, $apppassword);
 
-        //     //Creating a sender
+            //Creating a sender
 
-        //     $message = $receiver->getMessage(); // Get the message sent to the app
-        //     $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
-        //     $version_id = $receiver->getVersion();
+            $message = $receiver->getMessage(); // Get the message sent to the app
+            $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
+            $version_id = $receiver->getVersion();
 
 
-        //     //---------- 	Send a SMS to a particular user
-        //     $response = $sender->sms("Thank you for your response " . $message . ' ' . $version_id, $address);
-        // } catch (SMSServiceException $e) {
-        //     // $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
-        // }
+            //---------- 	Send a SMS to a particular user
+            $response = $sender->sms("Thank you for your response " . $message . ' ' . $version_id, $address);
+        } catch (SMSServiceException $e) {
+            echo 'failed';
+            // $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
+        }
     }
 }
