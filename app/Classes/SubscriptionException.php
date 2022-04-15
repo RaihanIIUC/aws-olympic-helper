@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Classes;
-
 use Exception;
 
 class SubscriptionException extends Exception{
@@ -30,3 +28,4 @@ class SubscriptionException extends Exception{
     }
 
 }
+?>

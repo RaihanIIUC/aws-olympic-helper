@@ -1,8 +1,8 @@
 <?php
+namespace App\Classes;
+use Exception;
+class CassException extends Exception{ //Cass Exception Handler
 
-class UssdException extends Exception{ // Ussd Exception Handler
-
-​
 
     var $code;
 
@@ -10,7 +10,6 @@ class UssdException extends Exception{ // Ussd Exception Handler
 
     var $statusMessage;
 
-​
 
     public function __construct($message, $code, $response = null){
 
@@ -24,7 +23,6 @@ class UssdException extends Exception{ // Ussd Exception Handler
 
     }
 
-​
 
     public function getStatusCode(){
 
@@ -32,7 +30,6 @@ class UssdException extends Exception{ // Ussd Exception Handler
 
     }
 
-​
 
     public function getStatusMessage(){
 
@@ -40,21 +37,13 @@ class UssdException extends Exception{ // Ussd Exception Handler
 
     }
 
-​
 
     public function getRawResponse(){
 
         return $this->response;
 
     }
-
-​
-
 }
-
-​
-
-
 
 
 

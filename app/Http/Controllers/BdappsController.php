@@ -306,16 +306,16 @@ class BdappsController extends Controller
         $apppassword = "00febb6e06c0c8a30c268f18d69de401";
         $logger = new Logger();
 
-        // $receiver = new SMSReceiver(file_get_contents('php://input'));
+        $receiver = new SMSReceiver(file_get_contents('php://input'));
 
         //Creating a sender
         $sender = new SMSSender($server, $appid, $apppassword);
 
-        // $message = $receiver->getMessage(); // Get the message sent to the app
-        // $address = $receiver->getAddress(); // Get the phone no from which the message was sent
-        // $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
+        $message = $receiver->getMessage(); // Get the message sent to the app
+        $address = $receiver->getAddress(); // Get the phone no from which the message was sent
+        $appid = $receiver->getApplicationId(); // Get the phone no from which the message was sent
 
-        return response()->json([$sender]);
+        \info($receiver, $appid);
         //	Send a SMS to a particular user
         // $response = $sender->sms('Thanks for your response', $address);
         // response_log::create(['timeStamp' => $response->timeStamp, 'address' => $response->address, 'messageId' => $response->messageId, 'statusDetail' => $response->statusDetail, 'statusCode' => $response->statusCode]);

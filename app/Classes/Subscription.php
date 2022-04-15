@@ -1,53 +1,38 @@
 <?php
-
 namespace App\Classes;
-
 use App\Classes\SubscriptionException;
 
 class Subscription{
+    
     var $server;
-	var $password;
-	var $applicationId;
 
-    public function __construct($server,$password,$applicationId){
+    public function __construct($server){
         $this->server = $server; // Assign server url
-		$this->password = $password;
-		$this->applicationId = $applicationId;
-    }
-	
-	 public function getStatus($address){
-		 
-		 $this->server = 'https://developer.bdapps.com/subscription/getstatus';
-
-        $arrayField = array("applicationId" => $this->applicationId,
-            "password" => $this->password,
-            "subscriberId" => $address);
-
-        $jsonObjectFields = json_encode($arrayField);
-        $x =  $this->sendRequest($jsonObjectFields);
-        return $x->subscriptionStatus;
     }
 
-    public function subscribe($address){
-		
-		$this->server = 'https://developer.bdapps.com/subscription/send';
+    public function subscribe($address, $password, $applicationId, $action, $version,$binary_header){
 
-        $arrayField = array("applicationId" => $this->applicationId,
-            "password" => $this->password,
+        $arrayField = array("applicationId" => $applicationId,
+            "password" => $password,
             "subscriberId" => $address,
-            "version" => "1.0",
-			"action" => "1");
+            "version" => $version,
+			"action" => $action,
+            "binaryHeader" => $binary_header);
 
         $jsonObjectFields = json_encode($arrayField);
         return $this->sendRequest($jsonObjectFields);
     }
-	public function unSubscribe($address){
-		$this->server = 'https://developer.bdapps.com/subscription/send';
-        $arrayField = array("applicationId" => $this->applicationId,
-            "password" => $this->password,
+	public function unSubscribe($address, $password, $applicationId, $action, $version,$binary_header){
+
+        $arrayField = array("applicationId" => $applicationId,
+            "password" => $password,
             "subscriberId" => $address,
-            "version" => "1.0",
-			"action" => "0");
+            "sourceAddress" => $sourceAddress,
+            "chargingAmount" => $charging_amount,
+            "encoding" => $encoding,
+            "version" => $version,
+			"action" => $action,
+            "binaryHeader" => $binary_header);
 
         $jsonObjectFields = json_encode($arrayField);
         return $this->sendRequest($jsonObjectFields);
@@ -55,6 +40,7 @@ class Subscription{
 
     private function sendRequest($jsonObjectFields){
         $ch = curl_init($this->server);
+        // curl_setopt($ch, CURLOPT_INTERFACE,'43.255.154.44');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -62,15 +48,20 @@ class Subscription{
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $res = curl_exec($ch);
         curl_close($ch);
+		//dd($res);
         return $this->handleResponse($res);
     }
 
     private function handleResponse($resp){
         if ($resp == "") {
-            throw new SubscriptionException("Server URL is invalid", '500');
+           return "Error Occured";
+			
         } else {
-            return json_decode($resp);
+            return $resp;
         }
     }
 
 }
+
+
+?>
