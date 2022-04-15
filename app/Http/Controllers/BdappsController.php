@@ -26,7 +26,6 @@ use App\Models\route_with_number;
 use App\Models\response_log;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
-TypeError: log(): Argument #1 ($num) must be of type float, string given in file E:\Olympic\aws-olympic-helper\app\Http\Controllers\BdappsController.php on line 73
 
 class BdappsController extends Controller
 {
