@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Classes\UssdReceiver;
 use App\Classes\UssdSender;
 use App\Classes\UssdException;
-use App\Classes\Logger;
 use App\Classes\Subscription;
 use App\Classes\SubscriptionException;
 
@@ -48,7 +47,6 @@ class BdappsController extends Controller
         $server = 'https://developer.bdapps.com/sms/send';
         $appid = "APP_036385";
         $apppassword = "00febb6e06c0c8a30c268f18d69de401";
-        $logger = new Logger();
         $sender = new SMSSender($server, $appid, $apppassword);
         $datas = response_log::where('statusCode', '!=', 'S1000')->where('timeStamp', 'LIKE', $this->cur_date . "%")->take(10)->get();
         $myfile = fopen("tmp_file.txt", "a+") or die("Unable to open file!");
@@ -71,28 +69,29 @@ class BdappsController extends Controller
 
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
-        $logger = new Logger();
 
-        try {
+        \log('hello');
 
-
-            // Creating a receiver and intialze it with the incomming data
-            $receiver = new SMSReceiver($request->all());
+        // try {
 
 
-            $sender = new SmsSender("https://developer.bdapps.com/sms/send", $appid, $apppassword);
-
-            //Creating a sender
-
-            $message = $receiver->getMessage(); // Get the message sent to the app
-            $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
-            $version_id = $receiver->getVersion();
+        //     // Creating a receiver and intialze it with the incomming data
+        //     $receiver = new SMSReceiver($request->all());
 
 
-            //---------- 	Send a SMS to a particular user
-            $response = $sender->sms("Thank you for your response " . $message . ' ' . $version_id, $address);
-        } catch (SMSServiceException $e) {
-            // $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
-        }
+        //     $sender = new SmsSender("https://developer.bdapps.com/sms/send", $appid, $apppassword);
+
+        //     //Creating a sender
+
+        //     $message = $receiver->getMessage(); // Get the message sent to the app
+        //     $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
+        //     $version_id = $receiver->getVersion();
+
+
+        //     //---------- 	Send a SMS to a particular user
+        //     $response = $sender->sms("Thank you for your response " . $message . ' ' . $version_id, $address);
+        // } catch (SMSServiceException $e) {
+        //     // $logger->WriteLog($e->getErrorCode() . " " . $e->getErrorMessage() . "\n");
+        // }
     }
 }
