@@ -29,7 +29,7 @@ class SMSReceiver{
 
 		$jsonRequest = json_decode(file_get_contents('php://input'));
 
-		file_put_contents("test.txt",print_r($jsonRequest,true));
+		// file_put_contents("test.txt",print_r($jsonRequest,true));
 
         //$header=apache_request_headers();
 
@@ -138,5 +138,3 @@ class SMSReceiver{
 
 
 }
-
-?>
