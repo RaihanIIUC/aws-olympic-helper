@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class response_log extends Model
 {
-    protected $guarded = [];
+    protected $fillable = ['response'];
 }

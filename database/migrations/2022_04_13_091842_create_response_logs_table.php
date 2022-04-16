@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('response_logs', function (Blueprint $table) {
             $table->id();
+            $table->text('response');
             $table->timestamps();
         });
     }
