@@ -63,6 +63,7 @@ class BdappsController extends Controller
 
             $message = $receiver->getMessage(); // Get the message sent to the app
             $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
+            $jsonInfo = $receiver->getJson();
 
 
             //---------- 	Send a SMS to a particular user
@@ -74,6 +75,9 @@ class BdappsController extends Controller
                 'requestId' => $request->requestId
             ]);
 
+            response_log::create([
+                'response' => $jsonInfo,
+            ]);
 
 
 
@@ -81,9 +85,5 @@ class BdappsController extends Controller
         } catch (SMSServiceException $e) {
             $response =   $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
         }
-
-        response_log::create([
-            'response' => $response[0],
-        ]);
     }
 }
