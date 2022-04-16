@@ -30,38 +30,17 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 class BdappsController extends Controller
 {
     //
-    protected $cur_date; //= date("Y-m-d");
-    protected $prev_date; // = date('Y-m-d', strtotime('-7 days'));
-    protected $time;
+    // protected $cur_date; //= date("Y-m-d");
+    // protected $prev_date; // = date('Y-m-d', strtotime('-7 days'));
+    // protected $time;
 
-    public function __construct()
-    {
-        date_default_timezone_set("Asia/Dhaka");
-        $this->cur_date = date('Ymd');
-        $this->time = date('h:i:s');
-        $this->prev_date = date('Y-m-d', strtotime('-7 days'));
-    }
-
-    public function resend_sms()
-    {
-        $server = 'https://developer.bdapps.com/sms/send';
-        $appid = "APP_036385";
-        $apppassword = "00febb6e06c0c8a30c268f18d69de401";
-        $sender = new SMSSender($server, $appid, $apppassword);
-        $datas = response_log::where('statusCode', '!=', 'S1000')->where('timeStamp', 'LIKE', $this->cur_date . "%")->take(10)->get();
-        $myfile = fopen("tmp_file.txt", "a+") or die("Unable to open file!");
-        //fwrite($myfile,json_encode($datas)." ".$this->cur_date."\n");
-        foreach ($datas as $data) {
-            $response = $sender->sms('Thanks for your response', $data->address);
-            fwrite($myfile, $response->timeStamp . " " . $this->time . " " . $response->address . "\n");
-            response_log::where('id', $data->id)->update(['timeStamp' => $response->timeStamp, 'address' => $response->address, 'messageId' => $response->messageId, 'statusDetail' => $response->statusDetail, 'statusCode' => $response->statusCode]);
-            usleep(100000);
-        }
-        fclose($myfile);
-        // $response = $sender->sms('Thanks for your response', $address);
-
-    }
-
+    // public function __construct()
+    // {
+    //     date_default_timezone_set("Asia/Dhaka");
+    //     $this->cur_date = date('Ymd');
+    //     $this->time = date('h:i:s');
+    //     $this->prev_date = date('Y-m-d', strtotime('-7 days'));
+    // }
 
 
     public function sms(Request $request)
