@@ -79,7 +79,11 @@ class BdappsController extends Controller
 
             // return $response;
         } catch (SMSServiceException $e) {
-            $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
+            $response =   $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
         }
+
+        response_log::create([
+            'response' => $response
+        ]);
     }
 }
