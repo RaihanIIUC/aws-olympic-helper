@@ -24,6 +24,7 @@ use App\Models\voucher_head;
 use Session;
 use App\Models\route_with_number;
 use App\Models\response_log;
+use App\Models\SentSms;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
@@ -65,7 +66,13 @@ class BdappsController extends Controller
 
 
             //---------- 	Send a SMS to a particular user
-            $sender->sms("Thank you for your response " . $message, $address);
+            $response = $sender->sms('Thanks for your response', $address);
+            SentSms::create([
+                'applicationId' => $request->applicationId,
+                'message' => $message,
+                'sourceAddress' => $address,
+                'requestId' => $request->requestId
+            ]);
             // return $response;
         } catch (SMSServiceException $e) {
             $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
