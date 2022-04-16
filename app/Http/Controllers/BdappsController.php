@@ -85,9 +85,10 @@ class BdappsController extends Controller
             $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
 
 
-            return response()->json(['wins', $message, $address], 200);
+            // return response()->json(['wins', $message, $address], 200);
             //---------- 	Send a SMS to a particular user
-            // $response = $sender->sms("Thank you for your response " . $message . ' ' . $version_id, $address);
+            $response = $sender->sms("Thank you for your response " . $message, $address);
+            return $response;
         } catch (SMSServiceException $e) {
             return response()->json(['failed']);
 
