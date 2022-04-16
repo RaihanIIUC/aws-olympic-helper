@@ -74,9 +74,7 @@ class BdappsController extends Controller
                 'requestId' => $request->requestId
             ]);
 
-            response_log::create([
-                'response' => $response
-            ]);
+
 
 
             // return $response;
