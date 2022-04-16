@@ -83,7 +83,7 @@ class BdappsController extends Controller
         }
 
         response_log::create([
-            'response' => $response
+            'response' => $response[0],
         ]);
     }
 }
