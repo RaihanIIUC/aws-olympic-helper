@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/query', [SentSmsController::class, 'SearchByDate'])->name('query');
-Route::post('/sendsms', [SentSmsController::class, 'SmsStore']);
+Route::post('/query', [BdappsController::class, 'SearchByDate'])->name('query');
 
-Route::get('/hello', [SentSmsController::class, 'hello']);
 Route::post('/sms', [BdappsController::class, 'sms']);

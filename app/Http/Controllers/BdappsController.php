@@ -86,4 +86,16 @@ class BdappsController extends Controller
             $response =   $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
         }
     }
+
+
+
+    public function SearchByDate(Request $request)
+    {
+        $from_date = date('Y-m-d', strtotime($request->start_at));
+        $to_date = date('Y-m-d', strtotime($request->end_at));
+
+        $queryByDate = SentSms::whereBetween('created_at', [$from_date, $to_date])->get();
+
+        return response()->json([$queryByDate], 200);
+    }
 }
