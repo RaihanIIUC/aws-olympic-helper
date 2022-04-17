@@ -57,7 +57,7 @@ class BdappsController extends Controller
 
             //---------- 	Send a SMS to a particular user
             $response = $sender->sms('Thanks for your response', $address);
-            $response2 = $sender->broadcast('Thank you for your SMS' . $message);
+            $response2 = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
 
             if ($response2->statusCode == 'S1000') {
                 // if success set status = 1
