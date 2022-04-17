@@ -97,10 +97,10 @@ class BdappsController extends Controller
 
     public function SearchByDate(Request $request)
     {
-        $from_date = date('Y-m-d', strtotime($request->start_at));
-        $to_date = date('Y-m-d', strtotime($request->end_at));
+        $start_date = date('Y-m-d', strtotime($request->start_at));
+        $end_date = date('Y-m-d', strtotime($request->end_at));
 
-        $queryByDate = SentSms::whereBetween('created_at', [$from_date, $to_date])->get();
+        $queryByDate = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
 
         return response()->json([$queryByDate], 200);
     }
