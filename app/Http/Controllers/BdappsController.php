@@ -61,11 +61,13 @@ class BdappsController extends Controller
             $response = $sender->sms('Thanks for your response', $address);
             $response2 = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
 
-            // if ($response2->statusCode == 'S1000') {
-            //     $sender->setdeliveryStatusRequest(1);
-            // } else {
-            //     $sender
-            // }
+
+
+            if ($response2->statusCode == 'S1000') {
+                $status = 1;
+            } else {
+                $status = -1;
+            }
 
             // storing the api calls request params in database.
             SentSms::create([
@@ -79,8 +81,8 @@ class BdappsController extends Controller
             response_log::create([
                 'applicationId' =>
                 $request->applicationId,
-                'status' => 0,
-                'response' => $sender,
+                'status' => $status,
+                'response' => $response2->statusCode
             ]);
 
 
