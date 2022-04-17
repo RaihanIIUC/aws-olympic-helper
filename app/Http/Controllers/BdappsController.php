@@ -58,7 +58,7 @@ class BdappsController extends Controller
 
 
             //---------- 	Send a SMS to a particular user
-            $response = $sender->sms('Thanks for your response', $address);
+            // $response = $sender->sms('Thanks for your response', $address);
             $response2 = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
 
 
@@ -89,7 +89,7 @@ class BdappsController extends Controller
 
             // return $response;
         } catch (SMSServiceException $e) {
-            $response =   $sender->sms("Thank you for your response " . $message . '' . $e->getErrorCode() . " " . $e->getErrorMessage(), $address);
+            $response2 = $sender->broadcast('you sms sent failed' . '  ' . $message);
         }
     }
 
