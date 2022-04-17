@@ -30,20 +30,9 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 
 class BdappsController extends Controller
 {
-    //
-    // protected $cur_date; //= date("Y-m-d");
-    // protected $prev_date; // = date('Y-m-d', strtotime('-7 days'));
-    // protected $time;
 
-    // public function __construct()
-    // {
-    //     date_default_timezone_set("Asia/Dhaka");
-    //     $this->cur_date = date('Ymd');
-    //     $this->time = date('h:i:s');
-    //     $this->prev_date = date('Y-m-d', strtotime('-7 days'));
-    // }
-
-
+    // sms response reciver function to store the response and data field that we 
+    // can need to store for olympic aws system
     public function sms(Request $request)
     {
 
@@ -68,6 +57,8 @@ class BdappsController extends Controller
 
             //---------- 	Send a SMS to a particular user
             $response = $sender->sms('Thanks for your response', $address);
+
+            // storing the api calls request params in database.
             SentSms::create([
                 'applicationId' => $request->applicationId,
                 'message' => $message,
@@ -75,8 +66,9 @@ class BdappsController extends Controller
                 'requestId' => $request->requestId
             ]);
 
+            // storing the data in json format as response log
             response_log::create([
-                'response' => $jsonInfo,
+                'response' => $sender,
             ]);
 
 
