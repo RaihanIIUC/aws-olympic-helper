@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class response_log extends Model
 {
-    protected $fillable = ['response'];
+    protected $fillable = ['applicationId', 'status', 'response'];
 
     protected $casts = [
         'response' => 'array',

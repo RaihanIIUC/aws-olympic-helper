@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 class BdappsController extends Controller
 {
 
+
+
     // sms response reciver function to store the response and data field that we 
     // can need to store for olympic aws system
     public function sms(Request $request)
@@ -59,11 +61,11 @@ class BdappsController extends Controller
             $response = $sender->sms('Thanks for your response', $address);
             $response2 = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
 
-            if ($response2->statusCode == 'S1000') {
-                // if success set status = 1
-            } else {
-                // if fail set status = 0
-            }
+            // if ($response2->statusCode == 'S1000') {
+            //     $sender->setdeliveryStatusRequest(1);
+            // } else {
+            //     $sender
+            // }
 
             // storing the api calls request params in database.
             SentSms::create([
@@ -75,6 +77,9 @@ class BdappsController extends Controller
 
             // storing the data in json format as response log
             response_log::create([
+                'applicationId' =>
+                $request->applicationId,
+                'status' => 0,
                 'response' => $sender,
             ]);
 
