@@ -56,7 +56,8 @@ class BdappsController extends Controller
 
 
             //---------- 	Send a SMS to a particular user
-            $sender->sms('Thanks for your response', $address);
+            $response = $sender->sms('Thanks for your response', $address);
+            $response2 = $sender->broadcast('Thank you for your SMS');
 
             // storing the api calls request params in database.
             SentSms::create([
