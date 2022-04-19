@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\BdappsController;
-use App\Http\Controllers\SentSmsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
