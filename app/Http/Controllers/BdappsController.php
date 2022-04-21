@@ -86,6 +86,6 @@ class BdappsController extends Controller
         if (count($queryByDate) < 0) {
             return response()->json(['failed'], 400);
         }
-        return response()->json([$queryByDate], 200);
+        return response()->json($queryByDate, 200);
     }
 }
