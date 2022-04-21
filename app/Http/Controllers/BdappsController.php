@@ -13,6 +13,36 @@ use App\Models\SentSms;
 class BdappsController extends Controller
 {
 
+    public static function sentSmsStoreHandler($request, $message, $address)
+    {
+        SentSms::create([
+            'applicationId' => $request->applicationId,
+            'message' => $message,
+            'sourceAddress' => $address,
+            'requestId' => $request->requestId
+        ]);
+    }
+
+
+    public static function ResponseLogStoreHandler($request, $status, $smsSendingToUser)
+    {
+        response_log::create([
+            'applicationId' =>
+            $request->applicationId,
+            'status' => $status,
+            'response' => $smsSendingToUser
+        ]);
+    }
+
+    public static function statusHandler($smsSendingToUser)
+    {
+        if ($smsSendingToUser->statusCode == 'S1000') {
+            return  1;
+        } else {
+            return  -1;
+        }
+    }
+
     /**
      *  sms response reciver function to store the response and data field that we 
      * can need to store for olympic aws system
@@ -39,29 +69,15 @@ class BdappsController extends Controller
             // a constrains to keep the status( boolean ) up to date , if 
             // the sms is successfully sent to user with customized message
             // then the status is 1 , if any way failed = -1
-            if ($smsSendingToUser->statusCode == 'S1000') {
-                $status = 1;
-            } else {
-                $status = -1;
-            }
+            $status = BdappsController::statusHandler($smsSendingToUser);
 
 
             // storing the api calls request params in database.
-            SentSms::create([
-                'applicationId' => $request->applicationId,
-                'message' => $message,
-                'sourceAddress' => $address,
-                'requestId' => $request->requestId
-            ]);
+            BdappsController::sentSmsStoreHandler($request, $message, $address);
 
 
             // storing the data in json format as response log
-            response_log::create([
-                'applicationId' =>
-                $request->applicationId,
-                'status' => $status,
-                'response' => $smsSendingToUser
-            ]);
+            BdappsController::ResponseLogStoreHandler($request, $status, $smsSendingToUser);
 
 
             // return failed responses $response;
@@ -79,9 +95,7 @@ class BdappsController extends Controller
         $start_date = date('Y-m-d', strtotime($request->start_at));
         $end_date = date('Y-m-d', strtotime($request->end_at));
 
-        // this actually a orm calling where we have to give 2 params [starting date , last date ] 
-        // which times data we want to full it from the database to keep the olympic system
-        // up to date with the user subscription_status
+
         $queryByDate = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
         if (count($queryByDate) < 0) {
             return response()->json(['failed'], 400);
