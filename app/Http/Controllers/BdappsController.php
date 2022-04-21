@@ -66,18 +66,6 @@ class BdappsController extends Controller
             // to server , so then we uses the broadcast function to make it works
             $smsSendingToUser = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
 
-            // a constrains to keep the status( boolean ) up to date , if 
-            // the sms is successfully sent to user with customized message
-            // then the status is 1 , if any way failed = -1
-            $status = BdappsController::statusHandler($smsSendingToUser);
-
-
-            // storing the api calls request params in database.
-            BdappsController::sentSmsStoreHandler($request, $message, $address);
-
-
-            // storing the data in json format as response log
-            BdappsController::ResponseLogStoreHandler($request, $status, $smsSendingToUser);
 
 
             // return failed responses $response;
