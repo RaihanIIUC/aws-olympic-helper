@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->string('sourceAddress')->nullable();
             $table->string('requestId')->nullable();
-
             $table->timestamps();
         });
     }
