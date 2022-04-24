@@ -176,7 +176,7 @@
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
 
-                                    <th><span class="btn btn-success"></span> </th>
+                                    <th><span class="btn btn-success">Re-Pull</span> </th>
                                 </tr>
                                 @endforeach
 
