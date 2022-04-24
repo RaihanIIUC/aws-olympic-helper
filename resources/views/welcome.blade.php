@@ -165,7 +165,6 @@
                                     <th scope="col">Message</th>
                                     <th scope="col">sourceAddress</th>
 
-                                    <th scope="col">Action</th>
 
                                 </tr>
                             </thead>
@@ -176,7 +175,6 @@
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
 
-                                    <th><span class="btn btn-success">Re-Pull</span> </th>
                                 </tr>
                                 @endforeach
 
