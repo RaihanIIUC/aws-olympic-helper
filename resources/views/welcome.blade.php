@@ -21,7 +21,7 @@
         @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
 
         body {
-            background-color: #673AB7;
+
             font-family: 'Calibri', sans-serif !important
         }
 
