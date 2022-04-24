@@ -176,8 +176,7 @@
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
 
-                                    <th> <label class="customcheckbox"> <input type="checkbox" class="listCheckbox">
-                                            <span class="checkmark"></span> </label> </th>
+                                    <th><span class="btn btn-success"></span> </th>
                                 </tr>
                                 @endforeach
 
