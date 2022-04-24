@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/sms', [SmsTableController::class, 'smstableAction']);
+Route::get('/', [SmsTableController::class, 'smstableAction']);
