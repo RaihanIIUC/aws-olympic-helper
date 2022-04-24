@@ -163,6 +163,8 @@
                                 <tr>
                                     <th scope="col">SL</th>
                                     <th scope="col">Message</th>
+                                    <th scope="col">sourceAddress</th>
+
                                     <th scope="col">Action</th>
 
                                 </tr>
@@ -172,6 +174,8 @@
                                 <tr>
                                     <td>{{ $s->id }}</td>
                                     <td>{{ $s->message}}</td>
+                                    <td>{{ $s->sourceAddress}}</td>
+
                                     <th> <label class="customcheckbox"> <input type="checkbox" class="listCheckbox">
                                             <span class="checkmark"></span> </label> </th>
                                 </tr>
