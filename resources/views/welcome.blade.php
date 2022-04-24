@@ -154,7 +154,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title m-b-0">Static Table With Checkboxes</h5>
+                        <h5 class="card-title m-b-0">Table In our hand {{ $total }}</h5>
                     </div>
 
                     <div class="table-responsive">

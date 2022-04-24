@@ -10,6 +10,8 @@ class SmsTableController extends Controller
     public function smstableAction()
     {
         $sms = SentSms::latest()->paginate(5);
-        return view('welcome', compact('sms'));
+        $total = SentSms::count();
+
+        return view('welcome', compact('sms', 'total'));
     }
 }
