@@ -26,7 +26,7 @@
         }
 
         .container {
-            margin-top: 100px
+            margin-top: 70px
         }
 
         .card {
