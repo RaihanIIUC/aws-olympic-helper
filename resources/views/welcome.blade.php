@@ -180,7 +180,7 @@
 
                             </tbody>
                         </table>
-                        // pagination centered data in view page
+
                         <div class="d-flex">
                             <div class="mx-auto">
                                 {{$sms->links("pagination::bootstrap-4")}}
