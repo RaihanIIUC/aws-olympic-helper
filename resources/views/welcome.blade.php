@@ -157,6 +157,8 @@
                         <h5 class="card-title m-b-0">Table In our hand {{ $total }}</h5>
                     </div>
 
+                    @include('helper.range')
+
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-light">
