@@ -16,8 +16,15 @@
             </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="input_to">To</label>
+                <button type="submit" class="btn btn-success">Download</button>
+            </div>
+        </div>
+        <!-- 
         <div class="col-md-12  d-flex justify-content-center">
             <button type="submit" class="btn btn-success">Download</button>
-        </div>
+        </div> -->
     </form>
 </div>
