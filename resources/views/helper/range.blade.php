@@ -1,4 +1,4 @@
-<div class="col-lg-12 border border-primary">
+<div class="col-lg-12 border border-dark m-4">
     <h2 class="mb-5 text-center">(Date Range) To Pull data </h2>
     <form action="{{ route('query')}}" method="POST" class="row">
         @csrf
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="col-md-12  d-flex justify-content-center mb-5">
+        <div class="col-md-12  d-flex justify-content-center">
             <button type="submit" class="btn btn-success">Download</button>
         </div>
     </form>
