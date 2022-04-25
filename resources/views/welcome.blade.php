@@ -164,6 +164,7 @@
                                     <th scope="col">SL</th>
                                     <th scope="col">Message</th>
                                     <th scope="col">sourceAddress</th>
+                                    <th scope="col">Created at</th>
 
 
                                 </tr>
@@ -174,7 +175,7 @@
                                     <td>{{ $s->id }}</td>
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
-
+                                    <td>{{ $s->created_at}</td>
                                 </tr>
                                 @endforeach
 
