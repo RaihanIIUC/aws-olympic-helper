@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\QueryController;
 use App\Http\Controllers\SmsTableController;
 use Illuminate\Support\Facades\Route;
 
