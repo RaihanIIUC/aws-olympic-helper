@@ -16,7 +16,7 @@ class QueryController extends Controller
         $end_date = date('Y-m-d', strtotime($request->end_at));
 
 
-        $foundSms = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
+        $foundSms = SentSms::whereBetween('created_at', [$start_date, $end_date])->paginate(5);
 
         return view('query', compact('foundSms'));
     }
