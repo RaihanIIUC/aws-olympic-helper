@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [SmsTableController::class, 'smstableAction']);
+Route::post('/query', [QueryController::class, 'queryByDate'])->name('query');
