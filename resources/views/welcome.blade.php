@@ -180,7 +180,12 @@
 
                             </tbody>
                         </table>
-                        {{ $sms->links() }}
+                        <!-- {{ $sms->links() }} -->
+                        <div class="d-flex">
+                            <div class="mx-auto">
+                                {{$sms->links("pagination::bootstrap-4")}}
+                            </div>
+                        </div>
 
                     </div>
                 </div>
