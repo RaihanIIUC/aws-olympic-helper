@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="col-md-12  d-flex justify-content-center">
+        <div class="col-md-12  d-flex justify-content-center mb-5">
             <button type="submit" class="btn btn-success">Download</button>
         </div>
     </form>
