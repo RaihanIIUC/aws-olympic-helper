@@ -175,7 +175,7 @@
                                     <td>{{ $s->id }}</td>
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
-                                    <td>{{ $s->created_at}</td>
+                                    <td>{{ $s->created_at}}</td>
                                 </tr>
                                 @endforeach
 
