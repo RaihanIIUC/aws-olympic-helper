@@ -23,7 +23,6 @@ class BdappsController extends Controller
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
         $SendingSmsBaseUrl = "https://developer.bdapps.com/sms/send";
-        \info($apppassword);
 
         try {
             // Creating a receiver and intialze it with the incomming data
@@ -34,7 +33,6 @@ class BdappsController extends Controller
             $message = $receiver->getMessage(); // Get the message sent to the app
             $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
 
-            \info($appid);
 
             // we try here sms instead of broadcasting but it fails to send data to the server
             // to server , so then we uses the broadcast function to make it works

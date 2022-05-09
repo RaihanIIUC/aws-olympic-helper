@@ -35,7 +35,7 @@ class SMSReceiver
 
 		//$header=apache_request_headers();
 
-		file_put_contents("report.txt", print_r($jsonRequest, true));
+		// file_put_contents("report.txt", print_r($jsonRequest, true));
 
 		if (!(isset(
 
