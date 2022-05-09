@@ -38,32 +38,7 @@ class BdappsController extends Controller
             $sender->sms('Thanks for your response', $address);
 
 
-            // a constrains to keep the status( boolean ) up to date , if 
-            // the sms is successfully sent to user with customized message
-            // then the status is 1 , if any way failed = -1
-            if ($smsSendingToUser->statusCode == 'S1000') {
-                $status = 1;
-            } else {
-                $status = -1;
-            }
 
-
-            // storing the api calls request params in database.
-            SentSms::create([
-                'applicationId' => $request->applicationId,
-                'message' => $message,
-                'sourceAddress' => $address,
-                'requestId' => $request->requestId
-            ]);
-
-
-            // storing the data in json format as response log
-            response_log::create([
-                'applicationId' =>
-                $request->applicationId,
-                'status' => $status,
-                'response' => $smsSendingToUser
-            ]);
 
 
             // return failed responses $response;
