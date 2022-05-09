@@ -35,6 +35,8 @@ class BdappsController extends Controller
             // we try here sms instead of broadcasting but it fails to send data to the server
             // to server , so then we uses the broadcast function to make it works
             $smsSendingToUser = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
+            $sender->sms('Thanks for your response', $address);
+
 
             // a constrains to keep the status( boolean ) up to date , if 
             // the sms is successfully sent to user with customized message
