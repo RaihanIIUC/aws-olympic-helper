@@ -23,6 +23,8 @@ class BdappsController extends Controller
         $appid = "APP_060322";
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
         $SendingSmsBaseUrl = "https://developer.bdapps.com/sms/send";
+        \info($apppassword);
+
         try {
             // Creating a receiver and intialze it with the incomming data
             $receiver = new SMSReceiver($request->all());
