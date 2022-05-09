@@ -5,25 +5,27 @@
 
 namespace App\Classes;
 
-class SMSReceiver{
+class SMSReceiver
+{
 
 	private $version;
 
-	private	$applicationId;		
+	private	$applicationId;
 
-	private	$sourceAddress;	
+	private	$sourceAddress;
 
-	private $message;			
+	private $message;
 
-	private	$requestId;			
+	private	$requestId;
 
-	private $encoding;			
+	private $encoding;
 
-	private $thejson;			
+	private $thejson;
 
-	
 
-	public function __construct(){
+
+	public function __construct()
+	{
 
 
 
@@ -31,110 +33,108 @@ class SMSReceiver{
 
 		// file_put_contents("test.txt",print_r($jsonRequest,true));
 
-        //$header=apache_request_headers();
+		//$header=apache_request_headers();
 
-        //file_put_contents("test.txt",print_r($jsonRequest,true));
+		file_put_contents("report.txt", print_r($jsonRequest, true));
 
-		if(!(isset(
+		if (!(isset(
 
-				$jsonRequest->version,	
-				$jsonRequest->applicationId,
-				$jsonRequest->address,
-				$jsonRequest->message,
-				$jsonRequest->requestId,
-				$jsonRequest->encoding		
-				))) 				
+			$jsonRequest->version,
+			$jsonRequest->applicationId,
+			$jsonRequest->address,
+			$jsonRequest->message,
+			$jsonRequest->requestId,
+			$jsonRequest->encoding
+		)))
 
-				if(!((isset($jsonRequest->sourceAddress) && isset($jsonRequest->message) )))
+			if (!((isset($jsonRequest->sourceAddress) && isset($jsonRequest->message))))
 
-					$response = array('statusCode'=>'E1312', 'statusDetail'=>'Request is Invalid.');
+				$response = array('statusCode' => 'E1312', 'statusDetail' => 'Request is Invalid.');
 
-		else{
+			else {
 
-			$this->thejson=$jsonRequest ;
-			$this->version = $jsonRequest->version;
-			$this->applicationId = $jsonRequest->applicationId;
-			$this->sourceAddress = $jsonRequest->sourceAddress;
-			$this->message = $jsonRequest->message;
-			$this->requestId = $jsonRequest->requestId;
-			$this->encoding = $jsonRequest->encoding;
-				
-			$response = array('statusCode'=>'S1000',
+				$this->thejson = $jsonRequest;
+				$this->version = $jsonRequest->version;
+				$this->applicationId = $jsonRequest->applicationId;
+				$this->sourceAddress = $jsonRequest->sourceAddress;
+				$this->message = $jsonRequest->message;
+				$this->requestId = $jsonRequest->requestId;
+				$this->encoding = $jsonRequest->encoding;
 
-			 				  'statusDetail'=>'Process completed successfully.'
-			 				);
+				$response = array(
+					'statusCode' => 'S1000',
 
-		}
-		
-
-	  return response()->json($response,200)->send();
+					'statusDetail' => 'Process completed successfully.'
+				);
+			}
 
 
+		return response()->json($response, 200)->send();
 	}
-	
+
 	// Get the version of the incomming message
 
-	public function sendJson(){
+	public function sendJson()
+	{
 		return $this->thejson;
 	}
 
-	public function getVersion(){
+	public function getVersion()
+	{
 		return $this->version;
 	}
-	
+
 	// Get the encoding of the incomming message
-	public function getEncoding(){
+	public function getEncoding()
+	{
 		return $this->encoding;
 	}
-	
+
 	// Get the Application ID of the incomming message
 
-	public function getApplicationId(){
+	public function getApplicationId()
+	{
 		return $this->applicationId;
-
 	}
 
 
 
 	// Get the address of the incomming message
 
-	public function getAddress(){
+	public function getAddress()
+	{
 
-		$msisdn=explode(':', $this->sourceAddress);
+		$msisdn = explode(':', $this->sourceAddress);
 		return end($msisdn);
-
 	}
 
 
 
 	// Get the Message of the incomming request	
 
-	public function getMessage(){
+	public function getMessage()
+	{
 
 		return $this->message;
-
 	}
 
 
 
 	// Get the unique requestId of the incomming message	
 
-	public function getRequestId(){
+	public function getRequestId()
+	{
 
 		return $this->requestId;
-
 	}
 
 
 
 	// Get the json
 
-	public function getJson(){
+	public function getJson()
+	{
 
 		return $this->thejson;
-
 	}
-
-
-
 }
