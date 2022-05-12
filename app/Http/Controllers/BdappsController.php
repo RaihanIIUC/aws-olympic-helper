@@ -24,8 +24,7 @@ class BdappsController extends Controller
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
         $SendingSmsBaseUrl = "https://developer.bdapps.com/sms/send";
 
-        try {
-            // Creating a receiver and intialze it with the incomming data
+        // Creating a receiver and intialze it with the incomming data
             $receiver = new SMSReceiver($request->all());
             $sender = new SmsSender($SendingSmsBaseUrl, $appid, $apppassword);
 
@@ -66,11 +65,6 @@ class BdappsController extends Controller
                 'response' => $smsSendingToUser
             ]);
 
-
-            // return failed responses $response;
-        } catch (SMSServiceException $e) {
-            $response2 = $sender->broadcast('you sms sent failed' . '  ' . $message);
-        }
     }
 
     /**
