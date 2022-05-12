@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('response_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('applicationId');
+            $table->string('applicationId')->nullable();
             $table->boolean('status')->default(false);
-            $table->text('response');
+            $table->text('response')->nullable();
             $table->timestamps();
         });
     }

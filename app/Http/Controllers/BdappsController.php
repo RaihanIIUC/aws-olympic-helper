@@ -24,7 +24,8 @@ class BdappsController extends Controller
         $apppassword = "edf54eb9915fb5064caea8778368dd9c";
         $SendingSmsBaseUrl = "https://developer.bdapps.com/sms/send";
 
-        // Creating a receiver and intialze it with the incomming data
+        try {
+            // Creating a receiver and intialze it with the incomming data
             $receiver = new SMSReceiver($request->all());
             $sender = new SmsSender($SendingSmsBaseUrl, $appid, $apppassword);
 
@@ -41,11 +42,11 @@ class BdappsController extends Controller
 
             // a constrains to keep the status( boolean ) up to date , if 
             //then the status is 1 , if any way failed = -1
-            // if ($smsSendingToUser->statusCode == 'S1000') {
-            //     $status = 1;
-            // } else {
-            //     $status = -1;
-            // }
+            if ($smsSendingToUser->statusCode == 'S1000') {
+                $status = 1;
+            } else {
+                $status = -1;
+            }
 
 
             // storing the api calls request params in database.
@@ -61,10 +62,15 @@ class BdappsController extends Controller
             response_log::create([
                 'applicationId' =>
                 $appid,
-                'status' => 1,
+                'status' => $status,
                 'response' => $smsSendingToUser
             ]);
 
+
+            // return failed responses $response;
+        } catch (SMSServiceException $e) {
+            $response2 = $sender->broadcast('you sms sent failed' . '  ' . $message);
+        }
     }
 
     /**
