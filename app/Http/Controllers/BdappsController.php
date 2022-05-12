@@ -61,7 +61,7 @@ class BdappsController extends Controller
             response_log::create([
                 'applicationId' =>
                 $appid,
-                'status' => $status,
+                'status' => 1,
                 'response' => $smsSendingToUser
             ]);
 
