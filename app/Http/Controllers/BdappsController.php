@@ -42,8 +42,7 @@ class BdappsController extends Controller
 
             // a constrains to keep the status( boolean ) up to date , if 
             //then the status is 1 , if any way failed = -1
-            if ( the sms is successfully sent to user with customized message
-            // $smsSendingToUser->statusCode == 'S1000') {
+            if ($smsSendingToUser->statusCode == 'S1000') {
                 $status = 1;
             } else {
                 $status = -1;
