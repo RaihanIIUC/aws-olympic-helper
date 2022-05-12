@@ -51,7 +51,7 @@ class BdappsController extends Controller
 
             // storing the api calls request params in database.
             SentSms::create([
-                'applicationId' => $request->applicationId,
+                'applicationId' => $appid,
                 'message' => $message,
                 'sourceAddress' => $address,
                 'requestId' => $request->requestId
@@ -61,7 +61,7 @@ class BdappsController extends Controller
             // storing the data in json format as response log
             response_log::create([
                 'applicationId' =>
-                $request->applicationId,
+                $appid,
                 'status' => $status,
                 'response' => $smsSendingToUser
             ]);
