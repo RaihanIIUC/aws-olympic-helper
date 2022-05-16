@@ -187,8 +187,7 @@
 
                                 </tr>
                                     
-                                @endempty
-                                @endforelse
+                                 @endforelse
 
                             </tbody>
                         </table>
