@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-12  d-flex justify-content-center my-3">
-            <button type="submit" class="btn btn-success">Download</button>
+            <button type="submit" class="btn btn-info">Search</button>
         </div>
     </form>
 </div>
