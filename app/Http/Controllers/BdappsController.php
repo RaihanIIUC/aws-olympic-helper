@@ -85,7 +85,10 @@ class BdappsController extends Controller
         // this actually a orm calling where we have to give 2 params [starting date , last date ] 
         // which times data we want to full it from the database to keep the olympic system
         // up to date with the user subscription_status
-        $queryByDate = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
+        // $queryByDate = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
+       $queryByDate = SentSms::whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->get();
+
+       
         if (count($queryByDate) < 0) {
             return response()->json(['failed'], 400);
         }
