@@ -176,7 +176,7 @@
                             <tbody class="customtable">
                                 @foreach($sms as $s)
                                 <tr>
-                                    <td>{{ $s->id }}</td>
+                                    <td>{{ $no_count++ }}</td>
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
                                     <td>{{ $s->created_at}}</td>
