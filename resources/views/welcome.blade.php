@@ -153,6 +153,9 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+             <a class="btn btn-info" href="{{ url("/") }}">Back to Home</a>
+
+
 
 
                     @include('helper.range')
