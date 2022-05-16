@@ -152,6 +152,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                         <a class="btn btn-info" href="{{ url("/") }}">Back to Home</a>
+
                 <div class="card">
                     <div class="card-body text-center">
                         <h5 class="card-title m-b-0">Table In SearchByDate</h5>
