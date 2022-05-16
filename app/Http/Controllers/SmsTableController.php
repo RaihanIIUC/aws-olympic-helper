@@ -11,7 +11,7 @@ class SmsTableController extends Controller
     {
         $sms = SentSms::latest()->paginate(5);
         $total = SentSms::count();
-        $no_count = 0;
+        $no_count = 1;
 
         return view('welcome', compact('sms', 'total','no_count'));
     }
