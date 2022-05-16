@@ -171,14 +171,24 @@
                                 </tr>
                             </thead>
                             <tbody class="customtable">
-                                @foreach($foundSms as $s)
+                                @forelse($foundSms as $s)
                                 <tr>
                                     <td>{{ $s->id }}</td>
                                     <td>{{ $s->message}}</td>
                                     <td>{{ $s->sourceAddress}}</td>
                                     <td>{{ $s->created_at}}</td>
                                 </tr>
-                                @endforeach
+
+                                @empty
+
+                                <tr>
+                                <td colspan="4" class="text-center">No data found</td>
+
+
+                                </tr>
+                                    
+                                @endempty
+                                @endforelse
 
                             </tbody>
                         </table>
