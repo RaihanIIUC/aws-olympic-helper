@@ -21,7 +21,7 @@ class SentSmsFactory extends Factory
             'sourceAddress' => $this->faker->numerify('APP-#######'),
             'message' => $this->faker->text(),
             'requestId' => $this->faker->phoneNumber(),
-            'created_at' => $this->faker->dateTimeThisYear('+2 months')
+            // 'created_at' => $this->faker->dateTimeThisYear('+2 months')
         ];
     }
 }
