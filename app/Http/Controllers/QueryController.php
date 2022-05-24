@@ -14,7 +14,7 @@ class QueryController extends Controller
     {
         $start_date = date('Y-m-d', strtotime($request->start_at));
         $end_date = date('Y-m-d', strtotime($request->end_at));
-       $queryByDate = SentSms::whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->get();
+        $foundSms = SentSms::whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->paginate(5);
 
 
         // $foundSms = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
@@ -22,8 +22,8 @@ class QueryController extends Controller
 
         
         $no_count = 1;
-        dd($queryByDate);
+        dd($foundSms);
 
-        // return view('query', compact('queryByDate','no_count'));
+        // return view('query', compact('foundSms','no_count'));
     }
 }
