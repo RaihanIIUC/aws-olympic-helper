@@ -22,7 +22,8 @@ class QueryController extends Controller
 
         
         $no_count = 1;
+        dd($foundSms);
 
-        return view('query', compact('foundSms','no_count'));
+        // return view('query', compact('foundSms','no_count'));
     }
 }
