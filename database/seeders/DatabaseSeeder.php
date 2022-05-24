@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        SentSms::factory(10000)->create();
+        SentSms::factory(5000)->create();
     }
 }
