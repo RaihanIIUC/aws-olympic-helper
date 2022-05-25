@@ -18,9 +18,7 @@
             font-family: 'Nunito', sans-serif;
         }
 
-        @import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
-
-        body {
+        <blade import|%20url(http%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DCalibri%3A400%2C300%2C700)%3B%0D>body {
 
             font-family: 'Calibri', sans-serif !important
         }
@@ -145,58 +143,61 @@
             -ms-transform: rotate(45deg);
             transform: rotate(45deg)
         }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
+    @livewire('post-form')
 
- 
-                    @include('helper.range')
-
-                    <div class="card-body text-center">
-                        <h5 class="card-title m-b-0">Table In our hand {{ $total }}</h5>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">SL</th>
-                                    <th scope="col">Message</th>
-                                    <th scope="col">sourceAddress</th>
-                                    <th scope="col">Created at</th>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
 
 
-                                </tr>
-                            </thead>
-                            <tbody class="customtable">
-                                @foreach($sms as $s)
-                                <tr>
-                                    <td>{{ $no_count++ }}</td>
-                                    <td>{{ $s->message}}</td>
-                                    <td>{{ $s->sourceAddress}}</td>
-                                    <td>{{ $s->created_at}}</td>
-                                </tr>
-                                @endforeach
+                        @include('helper.range')
 
-                            </tbody>
-                        </table>
-
-                        <div class="d-flex">
-                            <div class="mx-auto">
-                                {{$sms->links("pagination::bootstrap-4")}}
-                            </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title m-b-0">Table In our hand {{ $total }}</h5>
                         </div>
 
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">SL</th>
+                                        <th scope="col">Message</th>
+                                        <th scope="col">sourceAddress</th>
+                                        <th scope="col">Created at</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody class="customtable">
+                                    @foreach($sms as $s)
+                                        <tr>
+                                            <td>{{ $no_count++ }}</td>
+                                            <td>{{ $s->message }}</td>
+                                            <td>{{ $s->sourceAddress }}</td>
+                                            <td>{{ $s->created_at }}</td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+
+                            <div class="d-flex">
+                                <div class="mx-auto">
+                                    {{ $sms->links("pagination::bootstrap-4") }}
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
