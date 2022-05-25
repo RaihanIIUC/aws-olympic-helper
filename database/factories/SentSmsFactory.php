@@ -19,7 +19,7 @@ class SentSmsFactory extends Factory
         return [
             'applicationId' => 'APP-1812264',
             'sourceAddress' =>  'APP-9864752',
-            'message' => $this->faker->text(),
+            'message' =>   'Et labore nostrum repellat tenetur facilis in quisquam. Ea et explicabo enim eveniet aut explicabo similique nulla.',
             'requestId' =>  '304.330.5912',
             // 'created_at' => $this->faker->dateTimeThisYear('+2 months')
         ];
