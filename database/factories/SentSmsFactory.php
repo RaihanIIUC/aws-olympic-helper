@@ -17,10 +17,10 @@ class SentSmsFactory extends Factory
     public function definition()
     {
         return [
-            'applicationId' => $this->faker->numerify('APP-#######'),
-            'sourceAddress' => $this->faker->numerify('APP-#######'),
+            'applicationId' => 'APP-1812264',
+            'sourceAddress' =>  'APP-9864752',
             'message' => $this->faker->text(),
-            'requestId' => $this->faker->phoneNumber(),
+            'requestId' =>  '304.330.5912',
             // 'created_at' => $this->faker->dateTimeThisYear('+2 months')
         ];
     }
