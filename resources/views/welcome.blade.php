@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    {{-- @include('helper.Style') --}}
+    @include('helper.Style')
 </head>
 
 <body>
