@@ -13,7 +13,7 @@
 
                 <div class="card">
                     <div class="card-body text-center">
-                        <h5 class="card-title m-b-0">Table In SearchByDate</h5>
+                        <h5 class="card-title m-b-0">Table In SearchByDate {{ count($foundSms) }}</h5>
                     </div>
 
 
