@@ -30,9 +30,12 @@
                                 </tr>
                             </thead>
                             <tbody class="customtable">
+                                @php
+                                    $cnt = 1
+                                @endphp
                                 @forelse($foundSms as $s)
                                     <tr>
-                                        <td>{{ $s->id }}</td>
+                                        <td>{{ $cnt++ }}</td>
                                         <td>{{ $s->message }}</td>
                                         <td>{{ $s->sourceAddress }}</td>
                                         <td>{{ $s->created_at }}</td>
