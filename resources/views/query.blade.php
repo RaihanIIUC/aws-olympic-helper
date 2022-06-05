@@ -30,12 +30,10 @@
                                 </tr>
                             </thead>
                             <tbody class="customtable">
-                                @php
-                                    $cnt = 1
-                                @endphp
+
                                 @forelse($foundSms as $s)
                                     <tr>
-                                        <td>{{ $cnt++ }}</td>
+                                        <td>{{ $no_count++ }}</td>
                                         <td>{{ $s->message }}</td>
                                         <td>{{ $s->sourceAddress }}</td>
                                         <td>{{ $s->created_at }}</td>
@@ -54,16 +52,16 @@
                             </tbody>
                         </table>
 
-                        <div class="d-flex">
+                        {{--  <div class="d-flex">
                             <div class="mx-auto">
                                 {{ $foundSms->links("pagination::bootstrap-4") }}
-                            </div>
-                        </div>
-
                     </div>
-                </div>
+                </div> --}}
+
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </body>
 
