@@ -18,7 +18,7 @@ class SentSmsFactory extends Factory
     public function definition()
     {
         return [
-            'applicationId' => 'APP-1812264',
+            'applicationId' => 'APP_060322',
             'sourceAddress' =>  'APP-9864752',
             'message' =>   'Et labore nostrum repellat tenetur facilis in quisquam. Ea et explicabo enim eveniet aut explicabo similique nulla.',
             'requestId' =>  '304.330.5912',
