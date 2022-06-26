@@ -8,7 +8,7 @@ use App\Classes\SMSReceiver;
 use App\Classes\SMSServiceException;
 use App\Models\response_log;
 use App\Models\SentSms;
- use Storage;
+use Storage;
 
 
 class BdappsController extends Controller
@@ -34,11 +34,10 @@ class BdappsController extends Controller
             $message = $receiver->getMessage(); // Get the message sent to the app
             $address = $receiver->getAddress();    // Get the phone no from which the message was sent 
 
-            	file_put_contents("test.txt",$message);
-             // we try here sms instead of broadcasting but it fails to send data to the server
+            // we try here sms instead of broadcasting but it fails to send data to the server
             // to server , so then we uses the broadcast function to make it works
             // $smsSendingToUser = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
-            $smsSendingToUser = $sender->sms($message, $address);
+            $smsSendingToUser = $sender->sms('Thank you for your SMS', $address);
 
 
             // a constrains to keep the status( boolean ) up to date , if 
@@ -87,9 +86,9 @@ class BdappsController extends Controller
         // which times data we want to full it from the database to keep the olympic system
         // up to date with the user subscription_status
         // $queryByDate = SentSms::whereBetween('created_at', [$start_date, $end_date])->get();
-       $queryByDate = SentSms::whereDate('created_at','>=',$start_date)->whereDate('created_at','<=',$end_date)->get();
+        $queryByDate = SentSms::whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date)->get();
 
-       
+
         if (count($queryByDate) < 0) {
             return response()->json(['failed'], 400);
         }
