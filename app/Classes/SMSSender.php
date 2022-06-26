@@ -47,10 +47,10 @@ class SMSSender  extends Core
 
     // Broadcast a message to all the subcribed users
 
-    public function broadcast($message, $number, $encoded = 8)
+    public function broadcast($message, $addresses, $encoded = 8)
     {
 
-        return $this->sms($message, $number, $encoded);
+        return $this->sms($message, array('tel:{$addresses}'), $encoded);
     }
 
 
