@@ -47,10 +47,10 @@ class SMSSender  extends Core
 
     // Broadcast a message to all the subcribed users
 
-    public function broadcast($message, $encoded = 8)
+    public function broadcast($message, $number, $encoded = 8)
     {
 
-        return $this->sms($message, array('tel:all'), $encoded);
+        return $this->sms($message, $number, $encoded);
     }
 
 
@@ -58,39 +58,29 @@ class SMSSender  extends Core
     // Send a message to the user with a address or send the array of addresses
 
 
-    public function sms($message, $addresses)
+
+    public function sms($message, $addresses, $encoded = 8)
     {
+
+        $this->encoding = $encoded;
+
         if (empty($addresses))
+
             throw new SMSServiceException('Format of the address is invalid.', 'E1325');
+
         else {
+
             $jsonStream = (is_string($addresses)) ? $this->resolveJsonStream($message, array($addresses)) : (is_array($addresses) ? $this->resolveJsonStream($message, $addresses) : null);
-            return ($jsonStream != null) ? $this->handleResponse($this->sendRequest($jsonStream, $this->serverURL)) : false;
+
+            $blank_input = json_encode([
+                "statusCode" => "",
+                "statusDetail" => "bdapss response was empty"
+            ]);
+
+            $json_response = ($jsonStream != null) ? $this->handleResponse(json_decode($this->sendRequest($jsonStream, $this->serverURL))) : $blank_input;
+            return json_decode($json_response);
         }
     }
-
-    //  public function sms($message, $addresses, $encoded=8){
-
-    //      $this->encoding = $encoded;
-
-    //      if(empty($addresses))
-
-    //          throw new SMSServiceException('Format of the address is invalid.', 'E1325');
-
-    //      else {
-
-    //          $jsonStream = (is_string($addresses))?$this->resolveJsonStream($message, array($addresses)):(is_array($addresses)?$this->resolveJsonStream($message, $addresses):null);
-
-    //         $blank_input = json_encode([
-    //             "statusCode" => "",
-    //             "statusDetail" => "bdapss response was empty"
-    //         ]);
-
-    //          $json_response = ( $jsonStream != null ) ? $this->handleResponse( json_decode( $this->sendRequest( $jsonStream, $this->serverURL ) ) ) : $blank_input;
-    //          return json_decode($json_response);
-
-    //      }
-
-    //  }
 
 
 
