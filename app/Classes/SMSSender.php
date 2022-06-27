@@ -54,11 +54,9 @@ class SMSSender  extends Core
     }
 
 
-    public function broadcastToCustomer($message, $number, $encoded = 8)
+    public function broadcastToCustomer($message, $number)
     {
-        // echo "I love my $variable.";
-
-        return $this->sms($message, array("tel:$number"), $encoded);
+        return $this->sms($message, array("tel:$number"));
     }
 
 
