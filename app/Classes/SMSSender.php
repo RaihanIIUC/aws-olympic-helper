@@ -58,8 +58,7 @@ class SMSSender  extends Core
     {
         // echo "I love my $variable.";
 
-        $num = 8801855065201;
-        return $this->sms($message, array("tel:$num"), $encoded);
+        return $this->sms($message, array("tel:$number"), $encoded);
     }
 
 
