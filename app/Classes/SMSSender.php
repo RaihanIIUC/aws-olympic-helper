@@ -77,7 +77,7 @@ class SMSSender  extends Core
                 "statusDetail" => "bdapss response was empty"
             ]);
 
-            $json_response = ($jsonStream != null) ? $this->handleResponse(json_decode($this->sendRequest($jsonStream, $this->serverURL))) : $blank_input;
+            $json_response = $this->handleResponse(json_decode($this->sendRequest($jsonStream, $this->serverURL)));
             return json_decode($json_response);
         }
     }
