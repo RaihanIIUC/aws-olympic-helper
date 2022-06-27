@@ -41,7 +41,7 @@ class BdappsController extends Controller
             // we try here sms instead of broadcasting but it fails to send data to the server
             // to server , so then we uses the broadcast function to make it works
             // $smsSendingToUser = $sender->broadcast('Thank you for your SMS' . '  ' . $message);
-            $smsSendingToUser = $sender->sms('Thank you for your SMS' . '' . $message, '88' . '' . $address);
+            $smsSendingToUser = $sender->sms('Thank you for your SMS' . '' . $message, array('tel:' . '' . '88' . $address));
             // $sender->sendSMS('Thank you for your SMS' . '  ' . $message, $address);
 
 
