@@ -50,7 +50,7 @@ class SMSSender  extends Core
     public function broadcast($message, $encoded = 8)
     {
 
-        return $this->sms($message, 'tel:8801855065201', $encoded);
+        return $this->sms($message, array('tel:8801855065201'), $encoded);
     }
 
 
