@@ -54,13 +54,6 @@ class SMSSender  extends Core
         return $this->sms($message, array('tel:all'), $encoded);
     }
 
-    // public function sendSMS($message, $destinationAddress, $encoded = 8)
-    // {
-
-    //     $smsSender = new SMSSender("https://developer.bdapps.com/sms/send", $this->applicationId, $this->password);
-    //     $smsSender->sms($message, $destinationAddress, $encoded);
-    // }
-
 
 
     // Send a message to the user with a address or send the array of addresses
@@ -75,8 +68,9 @@ class SMSSender  extends Core
             throw new SMSServiceException('Format of the address is invalid.', 'E1325');
 
         else {
+            $jsonStream =   $this->resolveJsonStream($message, $addresses);
 
-            $jsonStream = (is_string($addresses)) ? $this->resolveJsonStream($message, array($addresses)) : (is_array($addresses) ? $this->resolveJsonStream($message, $addresses) : null);
+            // $jsonStream = (is_string($addresses)) ? $this->resolveJsonStream($message, array($addresses)) : (is_array($addresses) ? $this->resolveJsonStream($message, $addresses) : null);
 
             $blank_input = json_encode([
                 "statusCode" => "",
