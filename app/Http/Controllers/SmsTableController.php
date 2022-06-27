@@ -13,6 +13,8 @@ class SmsTableController extends Controller
         $total = SentSms::count();
         $no_count = 1;
 
-        return view('welcome', compact('sms', 'total','no_count'));
+        debugbar()->info('message1222');
+
+        return view('welcome', compact('sms', 'total', 'no_count'));
     }
 }
