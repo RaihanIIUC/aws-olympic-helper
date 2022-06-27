@@ -71,6 +71,8 @@ class SMSSender  extends Core
 
         $this->encoding = $encoded;
 
+
+
         if (empty($addresses))
 
             throw new SMSServiceException('Format of the address is invalid.', 'E1325');
