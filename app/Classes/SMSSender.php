@@ -58,7 +58,7 @@ class SMSSender  extends Core
 
     // Send a message to the user with a address or send the array of addresses
 
-    public function sms($message, $addresses = array('tel:8801855065201'), $encoded = 8)
+    public function sms($message, $addresses, $encoded = 8)
     {
 
         // $addresses =  array('tel:88'. $addresse);
