@@ -54,6 +54,12 @@ class SMSSender  extends Core
     }
 
 
+    public function broadcastToCustomer($message, $number, $encoded = 8)
+    {
+
+        return $this->sms($message, array('tel:88') . '' . $number, $encoded);
+    }
+
 
 
     // Send a message to the user with a address or send the array of addresses
