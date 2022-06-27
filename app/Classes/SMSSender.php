@@ -53,12 +53,12 @@ class SMSSender  extends Core
         return $this->sms($message, array('tel:all'), $encoded);
     }
 
-    public function sendSMS($message, $destinationAddress, $encoded = 8)
-    {
+    // public function sendSMS($message, $destinationAddress, $encoded = 8)
+    // {
 
-        $smsSender = new SMSSender("https://developer.bdapps.com/sms/send", $this->applicationId, $this->password);
-        $smsSender->sms($message, $destinationAddress, $encoded);
-    }
+    //     $smsSender = new SMSSender("https://developer.bdapps.com/sms/send", $this->applicationId, $this->password);
+    //     $smsSender->sms($message, $destinationAddress, $encoded);
+    // }
 
 
 
