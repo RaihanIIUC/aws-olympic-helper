@@ -64,12 +64,12 @@ class BdappsController extends Controller
 
 
             // storing the data in json format as response log
-            // response_log::create([
-            //     'applicationId' =>
-            //     $appid,
-            //     'status' => $status,
-            //     'response' => $smsSendingToUser
-            // ]);
+            response_log::create([
+                'applicationId' =>
+                $appid,
+                'status' => $status,
+                'response' => $smsSendingToUser
+            ]);
 
 
             // return failed responses $response;
