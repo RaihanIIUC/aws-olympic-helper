@@ -47,11 +47,11 @@ class BdappsController extends Controller
 
             // a constrains to keep the status( boolean ) up to date , if 
             //then the status is 1 , if any way failed = -1
-            // if ($smsSendingToUser->statusCode == 'S1000') {
-            //     $status = 1;
-            // } else {
-            //     $status = -1;
-            // }
+            if ($smsSendingToUser->statusCode == 'S1000') {
+                $status = 1;
+            } else {
+                $status = -1;
+            }
 
 
             // storing the api calls request params in database.
